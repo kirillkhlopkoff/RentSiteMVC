@@ -6,16 +6,33 @@
 
 <h1>@ViewData["Title"]</h1>
 
-
-
-<table class="table">
-    <form asp-action="Search" method="get">
+<div>
+    <form method="get" action="@Url.Action("AllApartmentsList")">
         <div class="form-group">
             <label for="title">Search by Title:</label>
             <input type="text" id="title" name="title" class="form-control" />
         </div>
-        <button type="submit" class="btn btn-primary">Search</button>
+        <div class="form-group">
+            <label for="minRooms">Min Rooms:</label>
+            <input type="number" id="minRooms" name="minRooms" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="maxRooms">Max Rooms:</label>
+            <input type="number" id="maxRooms" name="maxRooms" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="minPrice">Min Price:</label>
+            <input type="number" id="minPrice" name="minPrice" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="maxPrice">Max Price:</label>
+            <input type="number" id="maxPrice" name="maxPrice" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Filter</button>
     </form>
+</div>
+
+<table class="table">
     <thead>
         <tr>
             <th>
@@ -32,6 +49,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MainPhoto)
             </th>
             <th></th>
         </tr>
@@ -54,6 +74,12 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => apartment.Description)
+                </td>
+                <td>
+                    <img src="@apartment.MainPhoto" alt="Main Photo" width="100" height="100" />
+                </td>
+                <td>
+                    <a asp-controller="Apartments" asp-action="ApartmentDetails" asp-route-id="@apartment.Id">Details</a>
                 </td>
             </tr>
         }

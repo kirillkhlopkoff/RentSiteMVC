@@ -1,0 +1,34 @@
+﻿@model Apartment
+
+<h2>@Model.Title</h2>
+
+<a asp-controller="Apartments" asp-action="MyApartments">Back to List</a>
+
+<div>
+    <strong>Address:</strong> @Model.Address
+</div>
+<div>
+    <strong>Price:</strong> @Model.Price
+</div>
+<div>
+    <strong>Rooms:</strong> @Model.Rooms
+</div>
+<div>
+    <strong>Description:</strong> @Model.Description
+</div>
+<div>
+    <strong>City:</strong> @Model.City
+</div>
+<div>
+    <strong>Details:</strong> @Model.Details
+</div>
+
+@foreach (var photoUrl in Model.Photos)
+{
+    <img src="@photoUrl" alt="Photo" />
+}
+
+@*<form asp-controller="ApartmentsManage" asp-action="Delete" method="post" onsubmit="return confirm('Are you sure you want to delete this apartment?');">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>*@

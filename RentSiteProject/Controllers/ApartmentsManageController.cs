@@ -60,17 +60,46 @@ namespace RentSiteProject.Controllers
             return View(apartment);
         }
 
-        // Метод для редактирования квартиры (POST)
         [HttpPost]
         public IActionResult Edit(Apartment apartment)
         {
-            if (ModelState.IsValid)
+            var existingApartment = _context.Apartments.Find(apartment.Id);
+            if (/*ModelState.IsValid && */existingApartment != null)
             {
-                _context.Apartments.Update(apartment);
+                if (apartment.Title != null)
+                {
+                    existingApartment.Title = apartment.Title;
+                }
+                if (apartment.Address != null)
+                {
+                    existingApartment.Address = apartment.Address;
+                }
+                if (apartment.Price != null)
+                {
+                    existingApartment.Price = apartment.Price;
+                }
+                if (apartment.Rooms != null)
+                {
+                    existingApartment.Rooms = apartment.Rooms;
+                }
+                if (apartment.Description != null)
+                {
+                    existingApartment.Description = apartment.Description;
+                }
+                if (apartment.City != null)
+                {
+                    existingApartment.City = apartment.City;
+                }
+                if (apartment.Details != null)
+                {
+                    existingApartment.Details = apartment.Details;
+                }
+
+                _context.Apartments.Update(existingApartment);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("MyApartments", "Apartments");
             }
-            return View(apartment);
+            return RedirectToAction("ApartmentsEdit", "Apartments", new { id = apartment.Id });
         }
 
         // Метод для удаления квартиры
@@ -83,7 +112,7 @@ namespace RentSiteProject.Controllers
             }
             _context.Apartments.Remove(apartment);
             _context.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("MyApartments", "Apartments");
         }
     }
 }

@@ -15,7 +15,14 @@ namespace RentSiteProject.Models
         public string Address { get; set; }
         public int Rooms { get; set; }
         public string Details { get; set; }
-        public string MainPhoto { get; set; }
+        /*public string MainPhoto { get; set; }*/
+
+        public string[] Photos { get; set; } = new string[8]; // Массив строк-ссылок на фотографии
+
+        public string MainPhoto
+        {
+            get { return Photos?.FirstOrDefault(); }
+        }
 
         /*public List<Photo> Photos { get; set; }
         public string MainPhoto
