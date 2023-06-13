@@ -51,7 +51,9 @@
                             <div class="dropdown-menu" aria-labelledby="account-btn">
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Log Out</a>
+                                    <form method="post" asp-controller="Account" asp-action="Logout" asp-route-returnUrl="/">
+                                        <button type="submit" class="btn btn-link">Log Out</button>
+                                    </form>
                                     <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="MyAccount">My Account</a>
                                 }
                                 else

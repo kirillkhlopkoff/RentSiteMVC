@@ -13,10 +13,10 @@ namespace RentSiteProject.Data
             _configuration = configuration;
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
-        }
+        }*/
         public DbSet<Apartment> Apartments { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

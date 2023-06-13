@@ -63,8 +63,11 @@ namespace RentSiteProject.Controllers
         [HttpPost]
         public IActionResult Edit(Apartment apartment)
         {
+            // Получение текущего пользователя
+            User currentUser = _userManager.GetUserAsync(HttpContext.User).Result;
+
             var existingApartment = _context.Apartments.Find(apartment.Id);
-            if (/*ModelState.IsValid && */existingApartment != null)
+            if (/*ModelState.IsValid && */existingApartment != null && currentUser.Id == existingApartment.UserId)
             {
                 if (apartment.Title != null)
                 {
@@ -105,13 +108,19 @@ namespace RentSiteProject.Controllers
         // Метод для удаления квартиры
         public IActionResult Delete(int id)
         {
+            // Получение текущего пользователя
+            User currentUser = _userManager.GetUserAsync(HttpContext.User).Result;
+
             var apartment = _context.Apartments.Find(id);
-            if (apartment == null)
+            if (apartment.UserId == currentUser.Id)
             {
-                return NotFound();
+                if (apartment == null)
+                {
+                    return NotFound();
+                }
+                _context.Apartments.Remove(apartment);
+                _context.SaveChanges();
             }
-            _context.Apartments.Remove(apartment);
-            _context.SaveChanges();
             return RedirectToAction("MyApartments", "Apartments");
         }
     }

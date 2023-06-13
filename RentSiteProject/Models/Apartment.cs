@@ -1,4 +1,5 @@
-﻿using RentSiteProject.Models.Users;
+﻿using RentSiteProject.Models.Enum;
+using RentSiteProject.Models.Users;
 using System.ComponentModel.DataAnnotations;
 
 namespace RentSiteProject.Models
@@ -11,6 +12,7 @@ namespace RentSiteProject.Models
         public string Description { get; set; }
         public string Author { get; set; }
         public int Price { get; set; }
+        /*public City City { get; set; }*/
         public string City { get; set; }
         public string Address { get; set; }
         public int Rooms { get; set; }
